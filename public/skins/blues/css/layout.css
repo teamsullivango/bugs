@@ -1,0 +1,63 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	font-size: 10px;
+	background: blue;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#pageWrapper {
+	background: white;
+	width: 80em;
+	margin:1em auto;
+	padding:.5em;
+}
+
+#header {
+	background: gray;
+	white;
+	font-weight: bolder;
+	height:7.5em;
+	margin: .5em;
+}
+
+#nav {
+	background: blue;
+	color:white;
+	font-weight: bolder;
+	height:2.5em;
+	margin:.5em;
+}
+
+#sidebar {
+	background: white;
+	float:right;
+	width:17em;
+	height:40em;
+	margin:0 0 .5em .5em;
+	padding:.5em
+}
+
+#main{
+	background: white;
+	height:41em;
+	margin:0 1em 1em 0;
+}
+
+#sidebar div {
+	background: gray;
+	width:17em;
+	height:10em;
+	margin:0 0 .5em 0;
+}
+
+#footer {
+	clear: both;
+	background: blue;
+	color:white;
+	height: 3.5em;
+}
