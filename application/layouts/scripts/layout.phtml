@@ -1,0 +1,31 @@
+<?php 
+echo '<?xml version="1.0" encoding="UTF-8" ?>';
+echo $this->doctype()
+?>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<?php 
+echo $this->headTitle();
+echo $this->headScript();
+echo $this->headLink()->appendStylesheet('/css/layout.css');
+echo $this->headLink();
+?></head>
+<body>
+<div id="pageWrapper">
+	<div id="header">Zend Framework</div>
+	<div id="nav"><?php echo $this->layout()->nav;?></div>&nbsp;
+	<div id="sidebar">Sidebar
+		<div id="subNav">Subnav<?php echo $this->layout()->nav;?></div>&nbsp;
+		<div id="adminMenu">adminMenu<?php echo $this->layout()->adminMenu;?></div>&nbsp;
+		<div id="userForm">userForm<?php echo $this->layout()->userForm;?></div>&nbsp;
+	<?php echo $this->layout()->Sidebar;?></div>&nbsp;</div>
+	<div id="main">main<?php echo $this->layout()->content;?></div>&nbsp;
+	<div id="footer">footer<?php echo $this->layout()->footer;?></div>&nbsp;
+
+</div>
+
+
+
+</body>
+</html>
