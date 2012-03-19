@@ -18,8 +18,18 @@ class BugController extends Zend_Controller_Action
         // action body
     }
 
+    public function submitAction()
+    {
+    	$formBugReport = new Form_BugReportForm();
+    	$formBugReport->setAction('/bug/submit');
+    	$formBugReport->setMethod('post');
+    	$this->view->form = $formBugReport;
+    }
+
 
 }
+
+
 
 
 

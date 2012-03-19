@@ -15,6 +15,7 @@
         <controllerFile controllerName="Bug">
           <actionMethod actionName="index"/>
           <actionMethod actionName="create"/>
+          <actionMethod actionName="submit"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
@@ -34,6 +35,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Bug">
             <viewScriptFile forActionName="create"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Bug">
+            <viewScriptFile forActionName="submit"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
@@ -75,6 +79,7 @@
           <testApplicationControllerFile forControllerName="Bug">
             <testApplicationActionMethod forActionName="index"/>
             <testApplicationActionMethod forActionName="create"/>
+            <testApplicationActionMethod forActionName="submit"/>
           </testApplicationControllerFile>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>
