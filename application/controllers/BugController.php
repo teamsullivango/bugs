@@ -70,14 +70,15 @@ class BugController extends Zend_Controller_Action
     	if ($this->getRequest()->isPost())
     	{
     		if ($listToolsForm->isValid($_POST))
-    		{
+    		{    			 
     			$sortValue = $listToolsForm->getValue('sort');
-    			if ($sortValue != 0)
+    			if ($sortValue != null)
     			{
     				$sort = $sortValue;
     			}
+    			
     			$filterFieldValue = $listToolsForm->getValue('filter_field');
-    			if ($filterFieldValue != 0)
+    			if ($filterFieldValue != null)
     			{
     				$filter[$filterFieldValue] = $listToolsForm->getValue('filter');
     			}
@@ -85,6 +86,7 @@ class BugController extends Zend_Controller_Action
     	}
     	
         $bugModel = new Model_Bug();
+
         $this->view->bugs = $bugModel->fetchBugs($filter, $sort);
         //get the filter form
         $listToolsForm->setAction('/bug/list');

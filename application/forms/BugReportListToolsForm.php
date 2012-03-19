@@ -17,7 +17,6 @@ class Form_BugReportListToolsForm extends Zend_Form
 		
 		$filterField = new Zend_Form_Element_Select('filter_field');
 		$filterField->setLabel('Filter Field');
-		$filterField->setAttrib('size', 40);
 		$filterField->addMultiOptions($options);
 		$this->addElement($filterField);
 		
