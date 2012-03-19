@@ -29,7 +29,6 @@ class BugController extends Zend_Controller_Action
     	{
     		if ($formBugReport->isValid($_POST))
     		{
-    			echo "we made a bugmodel successfully";
     			try {
     				$bugModel = new Model_Bug();
     				$result = $bugModel->createBug(
