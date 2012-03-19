@@ -20,8 +20,6 @@ class BugController extends Zend_Controller_Action
 
     public function submitAction()
     {
-    	echo "we made a bugmodel successfully";
-    	 
     	$formBugReport = new Form_BugReportForm();
     	$formBugReport->setAction('/bug/submit');
     	$formBugReport->setMethod('post');
@@ -61,8 +59,43 @@ class BugController extends Zend_Controller_Action
         // action body
     }
 
+    public function listAction()
+    {
+    	//get the filter form
+    	$listToolsForm = new Form_BugReportListToolsForm();
+    	//set default values to null
+    	$sort = null;
+    	$filter = null;
+    	
+    	if ($this->getRequest()->isPost())
+    	{
+    		if ($listToolsForm->isValid($_POST))
+    		{
+    			$sortValue = $listToolsForm->getValue('sort');
+    			if ($sortValue != 0)
+    			{
+    				$sort = $sortValue;
+    			}
+    			$filterFieldValue = $listToolsForm->getValue('filter_field');
+    			if ($filterFieldValue != 0)
+    			{
+    				$filter[$filterFieldValue] = $listToolsForm->getValue('filter');
+    			}
+    		}
+    	}
+    	
+        $bugModel = new Model_Bug();
+        $this->view->bugs = $bugModel->fetchBugs($filter, $sort);
+        //get the filter form
+        $listToolsForm->setAction('/bug/list');
+        $listToolsForm->setMethod('post');
+        $this->view->listToolsForm = $listToolsForm;
+    }
+
 
 }
+
+
 
 
 
