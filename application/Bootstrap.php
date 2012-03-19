@@ -27,6 +27,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 				'form'	=>	array(
 					'path'		=>	'forms/',
 					'namespace'	=>	'Form_'
+				),
+				'model'	=> array(
+					'path'		=>	'models/',
+					'namespace'	=>	'Model_'
 				)
 			)
 		));

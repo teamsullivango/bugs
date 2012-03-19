@@ -44,7 +44,7 @@ body {
 
 #main{
 	background: white;
-	height:41em;
+	min-height:41em;
 	margin:0 1em 1em 0;
 }
 
