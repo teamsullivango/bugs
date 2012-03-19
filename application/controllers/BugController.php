@@ -30,22 +30,28 @@ class BugController extends Zend_Controller_Action
     		if ($formBugReport->isValid($_POST))
     		{
     			echo "we made a bugmodel successfully";
-    			 
-    			$bugModel = new Model_Bug();
-    			$result = $bugModel->createBug(
-	    			$formBugReport->getValue('author'), 
-	    			$formBugReport->getValue('email'), 
-	    			$formBugReport->getValue('date'), 
-	    			$formBugReport->getValue('url'), 
-	    			$formBugReport->getValue('description'), 
-	    			$formBugReport->getValue('priority'), 
-	    			$formBugReport->getValue('status')
-    			);
-    			
-    			if($result)    			
-    			{
-    				$this->_forward('confirm');
+    			try {
+    				$bugModel = new Model_Bug();
+    				$result = $bugModel->createBug(
+    				$formBugReport->getValue('author'),
+    				$formBugReport->getValue('email'),
+    				$formBugReport->getValue('date'),
+    				$formBugReport->getValue('url'),
+    				$formBugReport->getValue('description'),
+    				$formBugReport->getValue('priority'),
+    				$formBugReport->getValue('status')
+    				);
+    				 
+    				if($result)
+    				{
+    					$this->_forward('confirm');
+    				}
+    			} catch (Exception $e) {
+    				echo "<pre>";
+    				echo $e->getTraceAsString();
+    				echo "</pre>";
     			}
+
     		}
     	}
     	$this->view->form = $formBugReport;
