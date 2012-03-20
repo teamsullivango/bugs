@@ -141,4 +141,15 @@ class BugController extends Zend_Controller_Action
     	}
     	$this->view->form = $formBugReport;    	
     }
+
+    public function deleteAction()
+    {
+        $bug = new Model_Bug();
+        $id = $this->_request->getParam('id');
+        $bug->deleteBug($id);
+        return $this->_forward('list');
+    }
+
+
 }
+
