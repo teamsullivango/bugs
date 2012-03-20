@@ -18,6 +18,7 @@
           <actionMethod actionName="submit"/>
           <actionMethod actionName="confirm"/>
           <actionMethod actionName="list"/>
+          <actionMethod actionName="edit"/>
         </controllerFile>
       </controllersDirectory>
       <formsDirectory enabled="false"/>
@@ -46,6 +47,9 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Bug">
             <viewScriptFile forActionName="list"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Bug">
+            <viewScriptFile forActionName="edit"/>
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
@@ -90,6 +94,7 @@
             <testApplicationActionMethod forActionName="submit"/>
             <testApplicationActionMethod forActionName="confirm"/>
             <testApplicationActionMethod forActionName="list"/>
+            <testApplicationActionMethod forActionName="edit"/>
           </testApplicationControllerFile>
         </testApplicationControllerDirectory>
       </testApplicationDirectory>

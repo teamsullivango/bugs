@@ -106,7 +106,22 @@ class BugController extends Zend_Controller_Action
     	}
 
     }
+
+    public function editAction()
+    {
+    	$bugModel = new Model_Bug();
+    	$bugReportForm = new Form_BugReportForm();    	
+    	$bugReportForm->setAction('/bug/edit');
+    	$bugReportForm->setMethod('post');
+    	$id = $this->_request->getParam('id');
+    	$bug = $bugModel->find($id)->current();
+    	
+    }
+
+
 }
+
+
 
 
 
