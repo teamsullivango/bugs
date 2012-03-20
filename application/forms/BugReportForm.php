@@ -3,6 +3,10 @@ class Form_BugReportForm extends Zend_Form
 {
 	public function init()
 	{
+		//bug id number
+		$id = new Zend_Form_Element_Hidden('id');
+		$this->addElement($id);
+		
 		// author textbox
 		$author = new Zend_Form_Element_Text('author');
 		$author->setLabel('Enter your name:');

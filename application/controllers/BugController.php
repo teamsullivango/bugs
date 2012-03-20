@@ -97,7 +97,14 @@ class BugController extends Zend_Controller_Action
     	$page = $this->_request->getParam('page', 1);
     	$paginator->setCurrentPageNumber($page);
 
-        $this->view->bugs = $paginator;
+    	try {
+    		$this->view->paginator = $paginator;
+    	} catch (Exception $e) {
+    		echo '<pre>';
+    		echo $e->getTraceAsString();
+    		echo '</pre>';
+    	}
+
     }
 }
 
