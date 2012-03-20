@@ -63,38 +63,42 @@ class BugController extends Zend_Controller_Action
     {
     	//get the filter form
     	$listToolsForm = new Form_BugReportListToolsForm();
+    	$listToolsForm->setAction('/bug/list');
+    	$listToolsForm->setMethod('post');
+    	$this->view->listToolsForm = $listToolsForm;
+    	 
     	//set default values to null
-    	$sort = null;
-    	$filter = null;
+    	$sort = $this->_request->getParam('sort', null);
+    	$filterField = $this->_request->getParam('filter_field',null);
+    	$filterValue = $this->_request->getParam('filter');
     	
-    	if ($this->getRequest()->isPost())
+    	if (!empty($filterField))
     	{
-    		if ($listToolsForm->isValid($_POST))
-    		{    			 
-    			$sortValue = $listToolsForm->getValue('sort');
-    			if ($sortValue != null)
-    			{
-    				$sort = $sortValue;
-    			}
-    			
-    			$filterFieldValue = $listToolsForm->getValue('filter_field');
-    			if ($filterFieldValue != null)
-    			{
-    				$filter[$filterFieldValue] = $listToolsForm->getValue('filter');
-    			}
-    		}
+    		$filter[$filterField] = $filterValue;
+    	}
+    	else
+    	{
+    		$filter = null;
     	}
     	
-        $bugModel = new Model_Bug();
+    	//now, manually set the control values
+    	$listToolsForm->getElement('sort')->setValue($sort);
+    	$listToolsForm->getElement('filter_field')->setValue($filterField);
+    	$listToolsForm->getElement('filter')->setValue($filterValue);
+    	
+    	//now fetch the bug paginator
+    	$bugModel = new Model_Bug();
+    	$adapter = $bugModel->fetchPaginatorAdapter($filter, $sort);
+    	$paginator = new Zend_Paginator($adapter);
+    	
+    	//show 10 bugs per page
+    	$paginator->setItemCountPerPage(10);
+    	
+    	$page = $this->_request->getParam('page', 1);
+    	$paginator->setCurrentPageNumber($page);
 
-        $this->view->bugs = $bugModel->fetchBugs($filter, $sort);
-        //get the filter form
-        $listToolsForm->setAction('/bug/list');
-        $listToolsForm->setMethod('post');
-        $this->view->listToolsForm = $listToolsForm;
+        $this->view->bugs = $paginator;
     }
-
-
 }
 
 
