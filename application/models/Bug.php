@@ -16,7 +16,8 @@ class Model_Bug extends Zend_Db_Table_Abstract
 	
 	protected $_name = 'bugs';
 	
-	public function createBug($author, $email, $date, $url, $description, $priority, $status) {
+	public function createBug($author, $email, $date, $url, $description, $priority, $status) 
+	{
 		$row = $this->createRow();
 		
 		$row->author 		= 	$author;
@@ -53,4 +54,43 @@ class Model_Bug extends Zend_Db_Table_Abstract
 		return $adapter;
 	}
 	
+	public function updateBug($id, $author, $email, $date, $url, $description, $priority, $status) 
+	{
+		$row = $this->find($id)->current();
+		
+		if ($row)
+		{
+			// set the row data
+			$row->author = $author;
+			$row->email = $email;
+			$d = new Zend_Date($date);
+			$row->date = $d;
+			$row->url = $url;
+			$row->description = $description;
+			$row->priority = $priority;
+			$row->status = $status;
+			
+			$row->save();			
+		}
+		else {
+			// I reason that creating a row doesn't have much risk of failing, unless the db isn't connected, which
+			// we wouldn't handle in the model anyway. but if we wanted to write to a specific row, but it didn't exist
+			// that's possible, and we should handle that exception. I think.
+			throw new Zend_Exception("Update function failed; could not find bug! Row not found.");
+		}
+	}
+
+	public function deleteBug($id) 
+	{
+		$row = $this->find($id)->current();
+		if ($row)
+		{
+			$row->delete();
+			return true;
+		}
+		else
+		{
+			throw new Zend_Exception("Delete function failed; could not find bug! Row not found.");
+		}
+	}
 }

@@ -30,13 +30,13 @@ class BugController extends Zend_Controller_Action
     			try {
     				$bugModel = new Model_Bug();
     				$result = $bugModel->createBug(
-    				$formBugReport->getValue('author'),
-    				$formBugReport->getValue('email'),
-    				$formBugReport->getValue('date'),
-    				$formBugReport->getValue('url'),
-    				$formBugReport->getValue('description'),
-    				$formBugReport->getValue('priority'),
-    				$formBugReport->getValue('status')
+	    				$formBugReport->getValue('author'),
+	    				$formBugReport->getValue('email'),
+	    				$formBugReport->getValue('date'),
+	    				$formBugReport->getValue('url'),
+	    				$formBugReport->getValue('description'),
+	    				$formBugReport->getValue('priority'),
+	    				$formBugReport->getValue('status')
     				);
     				 
     				if($result)
@@ -110,24 +110,35 @@ class BugController extends Zend_Controller_Action
     public function editAction()
     {
     	$bugModel = new Model_Bug();
-    	$bugReportForm = new Form_BugReportForm();    	
-    	$bugReportForm->setAction('/bug/edit');
-    	$bugReportForm->setMethod('post');
-    	$id = $this->_request->getParam('id');
-    	$bug = $bugModel->find($id)->current();
-    	
+    	$formBugReport = new Form_BugReportForm();    	
+    	$formBugReport->setAction('/bug/edit');
+    	$formBugReport->setMethod('post');
+        if ($this->getRequest()->isPost())
+    	{
+    		if ($formBugReport->isValid($_POST))
+    		{ 
+    			$bugModel = new Model_Bug();
+    			$result = $bugModel->updateBug(
+    				$formBugReport->getValue('id'),
+	    			$formBugReport->getValue('author'),
+	    			$formBugReport->getValue('email'),
+	    			$formBugReport->getValue('date'),
+	    			$formBugReport->getValue('url'),
+	    			$formBugReport->getValue('description'),
+	    			$formBugReport->getValue('priority'),
+	    			$formBugReport->getValue('status')
+    			);
+  				$this->_forward('list');    			
+    		}    		
+    	}
+    	else 
+    	{
+    		$id = $this->_request->getParam('id');
+    		$bug = $bugModel->find($id)->current();
+    		$formBugReport->populate($bug->toArray());
+    		//format the date field
+    		$formBugReport->getElement('date')->setValue(date('m-d-Y', $bug->date));    		
+    	}
+    	$this->view->form = $formBugReport;    	
     }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
