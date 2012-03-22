@@ -2,16 +2,6 @@
 class Model_ContentNode extends Zend_Db_Table_Abstract
 {
 
-	/*
-	create table content_nodes (
-	id int(11) not null auto_increment,
-	page_id int(11) default null,
-	node varchar(50) default null,
-	content text,
-	primary key (id)
-	)default charset=utf8;
-	*/
-
 	protected $_name = 'content_nodes';
 	
 	protected $_referenceMap = array(
@@ -43,4 +33,14 @@ class Model_ContentNode extends Zend_Db_Table_Abstract
 		$row->content = $content;
 		$row->save();		
 	}
+	
+	/*
+	 create table content_nodes (
+	id int(11) not null auto_increment,
+	page_id int(11) default null,
+	node varchar(50) default null,
+	content text,
+	primary key (id)
+	)default charset=utf8;
+	*/
 }

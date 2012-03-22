@@ -68,4 +68,14 @@ class Model_Page extends Zend_Db_Table_Abstract
 			throw new Zend_Exception('Delete function failed; could not find page');
 		}
 	}
+	/*
+	create table pages (
+	id int(11) not null auto_increment,
+	parent_id in(11) default null,
+	namespace varchar(50) default null,
+	name varchar(100) default null,
+	date_created int(11) default null,
+	primary key (id)
+	) default charset=utf8;
+	*/
 }
